@@ -26,7 +26,7 @@ return (
               <img
                 src={item.myimg}
                 alt="no image found"
-                className="w-32 h-32 object-cover rounded-full border-4 border-gray-200 mb-4"
+                className="w-32 h-32 object-cover rounded-full border-4 border-gray-500 mb-4"
               />
 
               <h2 className="text-xl font-bold text-gray-800">
