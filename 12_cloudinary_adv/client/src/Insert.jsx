@@ -1,7 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Insert = () => {
+  let navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [input, setInput] = useState({
     name: "",
@@ -51,6 +53,7 @@ const Insert = () => {
       console.log(response.data);
 
       alert("Product uploaded successfully");
+      navigate("/display");
     } catch (error) {
       console.error(error);
       alert("Upload failed");

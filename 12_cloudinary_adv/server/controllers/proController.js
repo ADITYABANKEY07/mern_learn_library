@@ -50,4 +50,12 @@ const UploadProduct = (req, res) => {
   });
 };
 
-module.exports = { UploadProduct };
+const DisplayProduct = async (req, res) => {
+  let products = await ProductModel.find();
+  res.send(products);
+};
+
+module.exports = {
+  UploadProduct,
+  DisplayProduct,
+};
