@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require("express")
 const app = express()
 const bodyParser = require("body-parser")
@@ -10,11 +11,11 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use("/product", productRoute);
 
-mongoose.connect("mongodb://localhost:27017/clouddbpracadv").then(()=>{
+mongoose.connect(process.env.MONGO_URL).then(()=>{
     console.log("Db connected successfully");
 })
 
 
-app.listen(8003, ()=>{
-    console.log("Server run on 8003");
+app.listen(process.env.PORT, ()=>{
+    console.log(`Server run on ${process.env.PORT}`);
 })
