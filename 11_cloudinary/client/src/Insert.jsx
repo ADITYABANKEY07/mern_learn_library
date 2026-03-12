@@ -28,7 +28,8 @@ const Insert = () => {
     formData.append("upload_preset", "adityapre");
     formData.append("cloud_name", "dhaqmwrc2");
     let res = await axios.post(
-      "http://api.cloudinary.com/v1_1/dhaqmwrc2/image/upload",
+      // "Cloudinary, please upload this image to my cloud account."
+      "http://api.cloudinary.com/v1_1/dhaqmwrc2/image/upload", 
       formData,
     );
     console.log(res.data.url);
