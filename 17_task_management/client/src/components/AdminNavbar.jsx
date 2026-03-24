@@ -1,0 +1,46 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+const AdminNavbar = () => {
+  return (
+    /* h-screen: Full height of the browser
+       w-64: Standard sidebar width (fixed)
+       sticky top-0: Keeps it visible while scrolling content */
+    <div className="flex flex-col h-screen w-64 py-8 px-6 bg-orange-700 text-white sticky top-0 shadow-xl">
+      
+      <h1 className="text-3xl font-extrabold mb-12 border-b border-orange-600 pb-4">
+        Admin Panel
+      </h1>
+
+      <nav className="flex flex-col font-medium gap-4 text-xl">
+        <Link 
+          to="/dashboard/overview" 
+          className="hover:bg-orange-600 p-3 rounded-lg transition-colors"
+        >
+          Overview
+        </Link>
+        <Link 
+          to="/dashboard/product" 
+          className="hover:bg-orange-600 p-3 rounded-lg transition-colors"
+        >
+          Product
+        </Link>
+        <Link 
+          to="/dashboard/services" 
+          className="hover:bg-orange-600 p-3 rounded-lg transition-colors"
+        >
+          Services
+        </Link>
+      </nav>
+      
+      {/* Optional: Push a Logout button to the bottom */}
+      <div className="mt-auto">
+        <button className="w-full text-left p-3 hover:text-orange-200">
+          Logout
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default AdminNavbar;
