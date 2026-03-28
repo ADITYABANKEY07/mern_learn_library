@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const AdminNavbar = () => {
-    let navigate = useNavigate();
+  let navigate = useNavigate();
   return (
     /* h-screen: Full height of the browser
        w-64: Standard sidebar width (fixed)
@@ -20,16 +20,16 @@ const AdminNavbar = () => {
           Overview
         </Link>
         <Link
-          to="/dashboard/product"
+          to="/dashboard/createuser"
           className="hover:bg-orange-600 p-3 rounded-lg transition-colors"
         >
-          Product
+          Create User
         </Link>
         <Link
-          to="/dashboard/services"
+          to="/dashboard/userdetails"
           className="hover:bg-orange-600 p-3 rounded-lg transition-colors"
         >
-          Services
+          User Details
         </Link>
       </nav>
 
@@ -38,7 +38,7 @@ const AdminNavbar = () => {
         <button
           onClick={() => {
             localStorage.clear();
-            navigate("/home")
+            navigate("/home");
           }}
           className="w-full text-left p-3 hover:text-orange-200 font-bold cursor-pointer"
         >

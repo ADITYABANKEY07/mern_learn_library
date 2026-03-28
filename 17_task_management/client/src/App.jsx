@@ -6,6 +6,8 @@ import Dashboard from "./Dashboard";
 import Product from "./admin/Product";
 import Services from "./admin/Services";
 import Overview from "./admin/Overview";
+import CreateUser from "./admin/CreateUser";
+import UserDetails from "./admin/UserDetails";
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<Overview />} />
           <Route path="overview" element={<Overview />} />
+          <Route path="createuser" element={<CreateUser />} />
+          <Route path="userdetails" element={<UserDetails />} />
           <Route path="product" element={<Product />} />
           <Route path="services" element={<Services />} />
         </Route>

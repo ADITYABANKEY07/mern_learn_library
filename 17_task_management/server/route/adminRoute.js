@@ -1,7 +1,12 @@
 const express = require("express")
 const route = express.Router()
-const userController = require("../controller/userController")
+const adminController = require("../controller/adminController")
 
-route.post("/login", userController.Login)
+route.post("/login", adminController.Login)
+route.post("/createuser", adminController.CreateUser)
+route.get("/adminuserdisplay", adminController.AdminUserDisplay)
+route.get("/admineditdisplay", adminController.AdminUserEditFormDisplay)
+route.get("/adminuserdelete", adminController.AdminUserFormDelete)
+route.post("/adminuseredit", adminController.AdminUserEdit)
 
 module.exports = route
