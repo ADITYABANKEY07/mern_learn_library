@@ -3,6 +3,9 @@ import AdminNavbar from './components/AdminNavbar'
 import { Outlet } from 'react-router-dom'
 
 const Dashboard = () => {
+  let userAuthenticate = async () => {
+    
+  }
   return (
     // min-h-screen ensures it fills the page height
     // flex-row (default) puts sidebar and content side-by-side

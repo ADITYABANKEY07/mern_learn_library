@@ -1,5 +1,6 @@
 const AdminModel = require("../models/adminModel");
 const UserModel = require("../models/userModel");
+const TaskModel = require("../models/taskModel");
 const RandomPass = require("../middleware/randomPassword");
 const userModel = require("../models/userModel");
 const nodemailer = require("nodemailer");
@@ -62,7 +63,6 @@ const CreateUser = async (req, res) => {
     res.status(200).send({
       msg: "User created & email sent successfully ✅",
     });
-
   } catch (error) {
     console.log(error);
 
@@ -96,6 +96,15 @@ const AdminUserEdit = async (req, res) => {
   });
   res.send("User details edited successfully");
 };
+const AssignTask = async (req, res) => {
+  const{task, days, userId} =(req.body);
+    let admin = await TaskModel.create({
+    task: task,
+    days: days,
+    userId: userId,
+  });
+  res.send("User details edited successfully");
+};
 
 module.exports = {
   Login,
@@ -104,4 +113,5 @@ module.exports = {
   AdminUserEditFormDisplay,
   AdminUserFormDelete,
   AdminUserEdit,
+  AssignTask,
 };

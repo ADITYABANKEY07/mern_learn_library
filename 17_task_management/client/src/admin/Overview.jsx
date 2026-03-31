@@ -14,6 +14,11 @@ const Overview = () => {
             <Link to={"/dashboard/createuser"}>Create User</Link>
           </p>
         </div>
+                <div className="flex items-center justify-center bg-white px-5 py-5 w-1/2 h-30 rounded-xl cursor-pointer hover:border-2 hover:border-green-500">
+          <p className="text-2xl text-center font-semibold">
+            <Link to={"/dashboard/assigntask"}>Assign Task</Link>
+          </p>
+        </div>
         <div className="flex items-center justify-center bg-white px-5 py-5 w-1/2 h-30 rounded-xl cursor-pointer hover:border-2 hover:border-green-500">
           <p className="text-2xl text-center font-semibold">
             <Link to={"/dashboard/userdetails"}>User Details</Link>

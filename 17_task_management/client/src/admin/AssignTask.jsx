@@ -3,14 +3,14 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const UserDetails = () => {
+const AssignTask = () => {
   const [mydata, setMyData] = useState([]);
+  const [userId, setUserId] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   let [input, setInput] = useState({
-    name: "",
-    email: "",
-    post: "",
+    task: "",
+    days: "",
   });
 
   let handleInput = (e) => {
@@ -31,26 +31,18 @@ const UserDetails = () => {
     loadData();
   }, []);
 
-  let myDelete = async (id) => {
-    let api = `${import.meta.env.VITE_API_URL}/admin/adminuserdelete/?id=${id}`;
-    let res = await axios.get(api);
-    toast.success("User Deleted Successfully");
-    loadData();
-  };
   let myEdit = async (id) => {
-    let api = `${import.meta.env.VITE_API_URL}/admin/admineditdisplay/?id=${id}`;
-    let res = await axios.get(api, input);
-    setInput(res.data);
     setIsEditOpen(true);
+    setUserId(id);
   };
   let handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let api = `${import.meta.env.VITE_API_URL}/admin/adminuseredit`;
-      let res = await axios.post(api, input);
+      let api = `${import.meta.env.VITE_API_URL}/admin/assigntask`;
+      let res = await axios.post(api, { ...input, userId: userId });
       console.log(res.data);
-      loadData()
-      toast.success("User Details Updated Successfully ✅");
+      loadData();
+      toast.success("Assign Task Successfully ✅");
       setTimeout(() => {
         setIsEditOpen(false);
       }, 2000);
@@ -63,7 +55,7 @@ const UserDetails = () => {
     <div className="p-6 bg-gray-100 min-h-screen">
       <ToastContainer position="top-right" autoClose={3000} />
       <div className="bg-white shadow-lg rounded-2xl p-6">
-        <h2 className="text-2xl font-bold mb-4">User Details</h2>
+        <h2 className="text-2xl font-bold mb-4">Assign Task</h2>
 
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
@@ -100,17 +92,9 @@ const UserDetails = () => {
                       onClick={() => {
                         myEdit(item._id);
                       }}
-                      className="px-3 py-1 text-sm bg-green-500 cursor-pointer text-white rounded-lg hover:bg-green-600"
+                      className="px-3 py-2 text-sm bg-blue-500 font-semibold cursor-pointer text-white rounded-lg hover:bg-blue-600"
                     >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => {
-                        myDelete(item._id);
-                      }}
-                      className="px-3 py-1 text-sm bg-red-500 cursor-pointer text-white rounded-lg hover:bg-red-600"
-                    >
-                      Delete
+                      Assign Task
                     </button>
                   </td>
                 </tr>
@@ -141,45 +125,31 @@ const UserDetails = () => {
             </h1>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+              {userId}
               <input
                 type="text"
-                name="name"
-                value={input.name}
+                name="task"
+                value={input.task}
                 onChange={handleInput}
                 className="px-4 py-2 border rounded-lg"
-                placeholder="Name"
+                placeholder="Enter your task"
               />
 
               <input
-                type="email"
-                name="email"
-                value={input.email}
+                type="text"
+                name="days"
+                value={input.days}
                 onChange={handleInput}
                 className="px-4 py-2 border rounded-lg"
-                placeholder="Email"
+                placeholder="Enter days"
               />
-
-              <select
-                name="post"
-                value={input.post}
-                onChange={handleInput}
-                className="px-4 py-2 border rounded-lg"
-              >
-                <option value="programmer">Programmer</option>
-                <option value="designer">Designer</option>
-                <option value="analyst">Analyst</option>
-                <option value="teamleader">Team Leader</option>
-                <option value="projectmanager">Project Manager</option>
-                <option value="databasedesigner">Database Designer</option>
-              </select>
-
               {/* BUTTONS */}
               <div className="flex gap-3">
                 <button
                   type="submit"
                   className="w-full bg-blue-600 cursor-pointer text-white py-2 rounded-lg"
                 >
-                  Update
+                  Submit
                 </button>
 
                 <button
@@ -198,4 +168,4 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default AssignTask;

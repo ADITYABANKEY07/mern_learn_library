@@ -26,10 +26,16 @@ const AdminNavbar = () => {
           Create User
         </Link>
         <Link
+          to="/dashboard/assigntask"
+          className="hover:bg-orange-600 p-3 rounded-lg transition-colors"
+        >
+          Assign Task
+        </Link>
+        <Link
           to="/dashboard/userdetails"
           className="hover:bg-orange-600 p-3 rounded-lg transition-colors"
         >
-          User Details
+          Change User Details
         </Link>
       </nav>
 

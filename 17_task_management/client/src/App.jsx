@@ -8,6 +8,7 @@ import Services from "./admin/Services";
 import Overview from "./admin/Overview";
 import CreateUser from "./admin/CreateUser";
 import UserDetails from "./admin/UserDetails";
+import AssignTask from "./admin/AssignTask";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="overview" element={<Overview />} />
           <Route path="createuser" element={<CreateUser />} />
           <Route path="userdetails" element={<UserDetails />} />
+          <Route path="assigntask" element={<AssignTask />} />
           <Route path="product" element={<Product />} />
           <Route path="services" element={<Services />} />
         </Route>
