@@ -60,10 +60,10 @@ const UserDetails = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 bg-blue-50 min-h-screen">
       <ToastContainer position="top-right" autoClose={3000} />
       <div className="bg-white shadow-lg rounded-2xl p-6">
-        <h2 className="text-2xl font-bold mb-4">User Details</h2>
+        <h2 className="text-2xl text-blue-800 font-bold mb-4">User Details</h2>
 
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">

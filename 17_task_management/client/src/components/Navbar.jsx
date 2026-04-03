@@ -1,13 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-around py-4 bg-gradient-to-r from-[#0897d4] via-[#090979] to-[#00d4ff] text-white">
-    <h1 className="text-5xl font-bold" >Task Management</h1>
-      {/* <div className="nav-link flex font-semibold gap-10 text-3xl">
-        <Link to={"/home"}>Home</Link>
-      </div> */}
+    <div className="w-full bg-gradient-to-r from-blue-600 via-blue-800 to-cyan-600 text-white shadow-md">
+      <div className="max-w-6xl mx-auto flex items-center justify-center px-6 py-4">
+        <h1 className="text-2xl md:text-3xl font-bold tracking-wide">
+          Task Management
+        </h1>
+      </div>
     </div>
   );
 };

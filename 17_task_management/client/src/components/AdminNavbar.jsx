@@ -1,52 +1,78 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const AdminNavbar = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const linkStyle =
+    "flex items-center gap-3 p-3 rounded-lg transition-all duration-200";
+
+  const activeStyle = "bg-blue-700 text-white shadow-md";
+
   return (
-    /* h-screen: Full height of the browser
-       w-64: Standard sidebar width (fixed)
-       sticky top-0: Keeps it visible while scrolling content */
-    <div className="flex flex-col h-screen w-64 py-8 px-6 bg-orange-700 text-white sticky top-0 shadow-xl">
-      <h1 className="text-3xl font-extrabold mb-12 border-b border-orange-600 pb-4">
+    <div className="flex flex-col h-screen w-64 py-8 px-6 bg-blue-900 text-blue-100 sticky top-0 shadow-xl">
+      
+      {/* Logo / Title */}
+      <h1 className="text-2xl font-bold mb-10 border-b border-blue-700 pb-4 tracking-wide">
         Admin Panel
       </h1>
 
-      <nav className="flex flex-col font-medium gap-4 text-xl">
-        <Link
+      {/* Navigation */}
+      <nav className="flex flex-col gap-3 text-[17px]">
+        
+        <NavLink
           to="/dashboard/overview"
-          className="hover:bg-orange-600 p-3 rounded-lg transition-colors"
+          className={({ isActive }) =>
+            `${linkStyle} ${isActive ? activeStyle : "hover:bg-blue-800"}`
+          }
         >
           Overview
-        </Link>
-        <Link
+        </NavLink>
+
+        <NavLink
           to="/dashboard/createuser"
-          className="hover:bg-orange-600 p-3 rounded-lg transition-colors"
+          className={({ isActive }) =>
+            `${linkStyle} ${isActive ? activeStyle : "hover:bg-blue-800"}`
+          }
         >
           Create User
-        </Link>
-        <Link
+        </NavLink>
+
+        <NavLink
           to="/dashboard/assigntask"
-          className="hover:bg-orange-600 p-3 rounded-lg transition-colors"
+          className={({ isActive }) =>
+            `${linkStyle} ${isActive ? activeStyle : "hover:bg-blue-800"}`
+          }
         >
           Assign Task
-        </Link>
-        <Link
-          to="/dashboard/userdetails"
-          className="hover:bg-orange-600 p-3 rounded-lg transition-colors"
+        </NavLink>
+        <NavLink
+          to="/dashboard/seereport"
+          className={({ isActive }) =>
+            `${linkStyle} ${isActive ? activeStyle : "hover:bg-blue-800"}`
+          }
         >
-          Change User Details
-        </Link>
+          See Report
+        </NavLink>
+
+        <NavLink
+          to="/dashboard/userdetails"
+          className={({ isActive }) =>
+            `${linkStyle} ${isActive ? activeStyle : "hover:bg-blue-800"}`
+          }
+        >
+          User Details
+        </NavLink>
       </nav>
 
-      {/* Optional: Push a Logout button to the bottom */}
-      <div className="mt-auto">
+      {/* Logout */}
+      <div className="mt-auto pt-6 border-t border-blue-700">
         <button
           onClick={() => {
             localStorage.clear();
             navigate("/home");
           }}
-          className="w-full text-left p-3 hover:text-orange-200 font-bold cursor-pointer"
+          className="w-full text-left p-3 rounded-lg hover:bg-blue-800 cursor-pointer hover:text-white transition-all duration-200 font-semibold"
         >
           Logout
         </button>

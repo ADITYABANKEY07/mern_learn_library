@@ -76,6 +76,11 @@ const AdminUserDisplay = async (req, res) => {
   let admin = await UserModel.find();
   res.send(admin);
 };
+const OverviewTaskAdmin = async (req, res) => {
+  let task = await TaskModel.find();
+  res.send(task);
+};
+
 const AdminUserEditFormDisplay = async (req, res) => {
   let { id } = req.query;
   let admin = await UserModel.findById(id);
@@ -97,13 +102,18 @@ const AdminUserEdit = async (req, res) => {
   res.send("User details edited successfully");
 };
 const AssignTask = async (req, res) => {
-  const{task, days, userId} =(req.body);
-    let admin = await TaskModel.create({
+  const { task, daysAssign, userId } = req.body;
+  let admin = await TaskModel.create({
     task: task,
-    days: days,
+    daysAssign: daysAssign,
     userId: userId,
   });
-  res.send("User details edited successfully");
+  res.send("User assign task successfully");
+};
+
+const AdminSeeReport = async (req, res) => {
+  const report = await TaskModel.find().populate("userId");
+  res.send(report);
 };
 
 module.exports = {
@@ -114,4 +124,6 @@ module.exports = {
   AdminUserFormDelete,
   AdminUserEdit,
   AssignTask,
+  OverviewTaskAdmin,
+  AdminSeeReport,
 };

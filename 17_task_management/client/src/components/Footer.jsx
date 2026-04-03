@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Footer = () => {
   return (
-    <div className='flex items-center justify-center text-center bg-gray-700 py-5 mb-0'>
-        <h1 className='text-5xl font-semibold text-white'>Footer</h1>
+    <div className="bg-gray-800 text-white text-center py-4">
+      © 2026 Task Management. All rights reserved.
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

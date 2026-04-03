@@ -10,7 +10,7 @@ const AssignTask = () => {
 
   let [input, setInput] = useState({
     task: "",
-    days: "",
+    daysAssign: "",
   });
 
   let handleInput = (e) => {
@@ -52,10 +52,10 @@ const AssignTask = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 bg-blue-50 min-h-screen">
       <ToastContainer position="top-right" autoClose={3000} />
       <div className="bg-white shadow-lg rounded-2xl p-6">
-        <h2 className="text-2xl font-bold mb-4">Assign Task</h2>
+        <h2 className="text-2xl text-blue-800 font-bold mb-4">Assign Task</h2>
 
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
@@ -137,11 +137,11 @@ const AssignTask = () => {
 
               <input
                 type="text"
-                name="days"
-                value={input.days}
+                name="daysAssign"
+                value={input.daysAssign}
                 onChange={handleInput}
                 className="px-4 py-2 border rounded-lg"
-                placeholder="Enter days"
+                placeholder="Enter days assign"
               />
               {/* BUTTONS */}
               <div className="flex gap-3">

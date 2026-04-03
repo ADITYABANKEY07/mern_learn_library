@@ -40,7 +40,7 @@ const CreateUser = () => {
       <ToastContainer position="top-right" autoClose={2000} />
 
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 border border-gray-100">
-        <h1 className="text-3xl text-center font-extrabold text-blue-600 mb-8">
+        <h1 className="text-3xl text-center font-bold text-blue-600 mb-8">
           Create User Form
         </h1>
 
@@ -89,7 +89,7 @@ const CreateUser = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg"
+            className="w-full bg-blue-600 hover:bg-blue-700 cursor-pointer text-white font-bold py-3 rounded-lg"
           >
             Submit
           </button>
