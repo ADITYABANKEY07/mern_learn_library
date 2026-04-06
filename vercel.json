@@ -1,9 +1,0 @@
-{
-  "routes": [
-    { "handle": "filesystem" },
-    {
-      "src": "/(.*)",
-      "dest": "/17_task_management/client/dist/index.html"
-    }
-  ]
-}
