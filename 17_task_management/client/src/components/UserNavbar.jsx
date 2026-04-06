@@ -5,7 +5,9 @@ const UserNavbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
     navigate("/");
   };
 

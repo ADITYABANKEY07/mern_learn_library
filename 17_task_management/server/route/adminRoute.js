@@ -11,5 +11,6 @@ route.post("/adminuseredit", adminController.AdminUserEdit)
 route.post("/assigntask", adminController.AssignTask)
 route.get("/overviewtask", adminController.OverviewTaskAdmin)
 route.get("/seereportdata", adminController.AdminSeeReport)
+route.put("/reassign-task", adminController.reassignTask)
 
 module.exports = route

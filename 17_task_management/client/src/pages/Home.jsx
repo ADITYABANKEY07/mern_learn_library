@@ -24,7 +24,7 @@ const Home = () => {
       });
 
       // ✅ Dynamic toast
-      toast.success(`${userType} Login successful ✅`);
+      toast.success(`${userType} login successfully ✅`);
 
       // ✅ Store based on userType
       if (userType === "admin") {
@@ -111,7 +111,7 @@ return (
           {/* Button */}
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-200"
+            className="w-full bg-blue-600 hover:bg-blue-700 cursor-pointer text-white font-semibold py-2 rounded-lg transition-all duration-200"
           >
             Log In
           </button>

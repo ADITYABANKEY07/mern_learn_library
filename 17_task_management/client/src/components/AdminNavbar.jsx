@@ -69,7 +69,7 @@ const AdminNavbar = () => {
       <div className="mt-auto pt-6 border-t border-blue-700">
         <button
           onClick={() => {
-            localStorage.clear();
+            localStorage.removeItem("admin");
             navigate("/home");
           }}
           className="w-full text-left p-3 rounded-lg hover:bg-blue-800 cursor-pointer hover:text-white transition-all duration-200 font-semibold"

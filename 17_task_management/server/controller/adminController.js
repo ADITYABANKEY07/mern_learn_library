@@ -116,6 +116,30 @@ const AdminSeeReport = async (req, res) => {
   res.send(report);
 };
 
+const reassignTask = async (req, res) => {
+  const { taskId, userId } = req.query;
+
+  try {
+    if (!userId) {
+      return res.status(400).send({ msg: "UserId required" });
+    }
+
+    const updatedTask = await TaskModel.findByIdAndUpdate(
+      taskId,
+      {
+        userId, // ✅ must be valid user _id
+        status: "Pending",
+        daysCompleted: 0,
+      },
+      { new: true }
+    ).populate("userId");
+
+    res.send(updatedTask);
+  } catch (err) {
+    res.status(500).send({ msg: "Error reassigning task" });
+  }
+}; 
+
 module.exports = {
   Login,
   CreateUser,
@@ -126,4 +150,5 @@ module.exports = {
   AssignTask,
   OverviewTaskAdmin,
   AdminSeeReport,
+  reassignTask,
 };

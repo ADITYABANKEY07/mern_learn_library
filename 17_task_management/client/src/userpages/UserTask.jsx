@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserTask = () => {
   const [mydata, setMyData] = useState([]);
@@ -61,7 +63,7 @@ const UserTask = () => {
         daysCompleted: input.daysCompleted,
       });
 
-      alert("Task Updated ✅");
+      toast.success("Task Updated ✅");
 
       setIsModalOpen(false);
       setInput({
@@ -77,6 +79,7 @@ const UserTask = () => {
 
   return (
     <div className="p-6 bg-blue-50 min-h-screen">
+          <ToastContainer position="top-right" autoClose={3000} />
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-blue-900">My Tasks Dashboard</h1>
@@ -122,7 +125,7 @@ const UserTask = () => {
                       onClick={() => openModal(item._id)}
                       className="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-4 py-1 rounded-lg transition"
                     >
-                      Update
+                      Send Report
                     </button>
                   </td>
                 </tr>
