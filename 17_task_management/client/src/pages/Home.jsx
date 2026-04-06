@@ -26,7 +26,7 @@ const Home = () => {
       // ✅ Dynamic toast
       toast.success(`${userType} login successfully ✅`);
 
-      // ✅ Store based on userType
+            // ✅ Store based on userType
       if (userType === "admin") {
         localStorage.setItem("admin", res.data.admin.email);
 
@@ -41,6 +41,8 @@ const Home = () => {
           navigate("/userdashboard");
         }, 2000);
       }
+
+      
     } catch (error) {
       toast.error(error.response?.data?.msg || "Login failed ❌");
     }
