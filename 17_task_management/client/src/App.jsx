@@ -10,6 +10,7 @@ import SeeReport from "./admin/SeeReport";
 import AssignTask from "./admin/AssignTask";
 import UserDashboard from "./UserDashboard";
 import UserTask from "./userpages/UserTask";
+import ForgotPassword from "./components/ForgotPassword";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Route>
         <Route path="/userdashboard" element={<UserDashboard />}>
           <Route index element={<UserTask />} />

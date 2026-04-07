@@ -1,5 +1,7 @@
 const userModel = require("../models/userModel");
 const taskModel = require("../models/taskModel");
+const randomPass = require("../middleware/randomPassword");
+const nodemailer = require("nodemailer")
 
 const Login = async (req, res) => {
   const { email, password } = req.body;
@@ -49,8 +51,50 @@ const sendReportData = async (req, res) => {
   }
 };
 
+const ForgotPassword = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.status(404).send({ msg: "User not found" });
+    }
+
+    const newPass = randomPass.randomPassword();
+
+    user.password = newPass;
+    await user.save();
+
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.NODE_MAIL,
+        pass: process.env.NODE_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      to: email,
+      subject: "Your New Password",
+      html: `
+        <h2>Password Reset</h2>
+        <p>Your new password is:</p>
+        <h3>${newPass}</h3>
+      `,
+    });
+
+    res.send({ msg: "New password sent to email ✅" });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ msg: "Error resetting password" });
+  }
+};
+
 module.exports = {
   Login,
   getUserData,
   sendReportData,
+  ForgotPassword,
 };
