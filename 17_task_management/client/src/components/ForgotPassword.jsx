@@ -13,7 +13,7 @@ const ForgotPassword = () => {
       const api = `${import.meta.env.VITE_API_URL}/user/forgot-password`;
 
       await axios.post(api, { email });
-
+      console.log(res)
       toast.success("New password sent to your email ✅");
       setEmail("");
     } catch (err) {

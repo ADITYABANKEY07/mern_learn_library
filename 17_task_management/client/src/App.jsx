@@ -11,10 +11,13 @@ import AssignTask from "./admin/AssignTask";
 import UserDashboard from "./UserDashboard";
 import UserTask from "./userpages/UserTask";
 import ForgotPassword from "./components/ForgotPassword";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   return (
     <div>
+          <ToastContainer position="top-right" autoClose={2000} />
+
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
