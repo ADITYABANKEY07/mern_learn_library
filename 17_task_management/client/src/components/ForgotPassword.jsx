@@ -12,8 +12,8 @@ const ForgotPassword = () => {
     try {
       const api = `${import.meta.env.VITE_API_URL}/user/forgot-password`;
 
-      await axios.post(api, { email });
-      console.log(res)
+      const res = await axios.post(api, { email });
+      console.log(res);
       toast.success("New password sent to your email ✅");
       setEmail("");
     } catch (err) {
@@ -26,7 +26,6 @@ const ForgotPassword = () => {
       <ToastContainer position="top-right" autoClose={2000} />
 
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-
         {/* Title */}
         <h1 className="text-3xl font-extrabold text-blue-600 text-center mb-2">
           Forgot Password
@@ -38,7 +37,6 @@ const ForgotPassword = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-
           {/* Email */}
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700">
@@ -63,20 +61,18 @@ const ForgotPassword = () => {
           >
             Send New Password
           </button>
-
         </form>
 
         {/* Back to Login */}
         <p className="text-center text-sm text-gray-500 mt-6">
           Remember your password?{" "}
           <span
-            onClick={() => window.location.href = "/"}
+            onClick={() => (window.location.href = "/")}
             className="text-blue-600 font-medium cursor-pointer hover:underline"
           >
             Login
           </span>
         </p>
-
       </div>
     </div>
   );
