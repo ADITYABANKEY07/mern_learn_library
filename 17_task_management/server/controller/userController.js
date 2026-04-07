@@ -1,7 +1,7 @@
 const userModel = require("../models/userModel");
 const taskModel = require("../models/taskModel");
 const randomPass = require("../middleware/randomPassword");
-const nodemailer = require("nodemailer")
+const nodemailer = require("nodemailer");
 
 const Login = async (req, res) => {
   const { email, password } = req.body;
@@ -61,12 +61,14 @@ const ForgotPassword = async (req, res) => {
       return res.status(404).send({ msg: "User not found" });
     }
 
+    // 🔥 generate new password
     const newPass = randomPass.randomPassword();
 
     user.password = newPass;
     await user.save();
 
-    let transporter = nodemailer.createTransport({
+    // 📩 Transporter
+    let mailTransporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: process.env.NODE_MAIL,
@@ -74,21 +76,42 @@ const ForgotPassword = async (req, res) => {
       },
     });
 
-    await transporter.sendMail({
+    // 📩 Mail content (UPDATED UI)
+    let mailDetails = {
+      from: `"Task Manager Support" <${process.env.NODE_MAIL}>`,
       to: email,
-      subject: "Your New Password",
+      subject: "Password Reset Successful 🔐",
       html: `
-        <h2>Password Reset</h2>
-        <p>Your new password is:</p>
-        <h3>${newPass}</h3>
+      <div style="background:#f3f4f6;padding:20px;border-radius:10px;">
+        <h2>Password Reset Request ✅</h2>
+
+        <p>Hello <b>${user.name}</b>,</p>
+
+        <p>Your password has been successfully reset.</p>
+
+        <p><b>Email:</b> ${email}</p>
+        <p><b>New Password:</b> ${newPass}</p>
+
+        <br/>
+
+        <p>Please login using this password and change it immediately for security reasons.</p>
+
+        <br/>
+
+        <p style="color:gray;">If you did not request this, please contact admin.</p>
+         </div>
       `,
+    };
+
+    // 📩 Send Mail
+    await mailTransporter.sendMail(mailDetails);
+
+    res.status(200).send({
+      msg: "New password sent to email successfully ✅",
     });
-
-    res.send({ msg: "New password sent to email ✅" });
-
   } catch (err) {
     console.log(err);
-    res.status(500).send({ msg: "Error resetting password" });
+    res.status(500).send({ msg: "Error resetting password ❌" });
   }
 };
 
