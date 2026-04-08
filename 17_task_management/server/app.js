@@ -9,7 +9,11 @@ const userRoute = require("./route/userRoute");
 
 const PORT = process.env.PORT;
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://task-manager-app-woad-ten.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/admin", adminRoute)
