@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const AssignTask = () => {
+  let navigate = useNavigate();
   const [mydata, setMyData] = useState([]);
   const [userId, setUserId] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -54,6 +57,19 @@ const AssignTask = () => {
   return (
     <div className="p-6 bg-blue-50 min-h-screen">
       <ToastContainer position="top-right" autoClose={3000} />
+    <div className="flex justify-start mb-6">
+      <button
+        onClick={() => navigate("/dashboard")}
+        className="flex md:hidden items-center gap-2 px-4 py-2 
+        bg-gradient-to-r from-blue-600 to-blue-500 
+        text-white rounded-lg shadow-md 
+        hover:from-blue-700 hover:to-blue-600 
+        transition-all duration-300 text-sm font-medium"
+      >
+        <ArrowLeft size={18} />
+        <span>Go Back</span>
+      </button>
+    </div>
       <div className="bg-white shadow-lg rounded-2xl p-6">
         <h2 className="text-2xl text-blue-800 font-bold mb-4">Assign Task</h2>
 

@@ -2,8 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const SeeReport = () => {
+  let navigate = useNavigate()
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState("all");
   const [selectedTask, setSelectedTask] = useState(null);
@@ -61,6 +64,19 @@ const handleReassign = async (userId) => {
   return (
     <div className="min-h-screen bg-blue-50 p-6">
       <ToastContainer position="top-right" autoClose={3000} />
+          <div className="flex justify-start mb-6">
+      <button
+        onClick={() => navigate("/dashboard")}
+        className="flex md:hidden items-center gap-2 px-4 py-2 
+        bg-gradient-to-r from-blue-600 to-blue-500 
+        text-white rounded-lg shadow-md 
+        hover:from-blue-700 hover:to-blue-600 
+        transition-all duration-300 text-sm font-medium"
+      >
+        <ArrowLeft size={18} />
+        <span>Go Back</span>
+      </button>
+    </div>
       {/* Header */}
       <h1 className="text-3xl font-bold text-blue-900 mb-6">Task Reports</h1>
 

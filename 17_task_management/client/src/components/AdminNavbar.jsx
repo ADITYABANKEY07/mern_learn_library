@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-const AdminNavbar = () => {
+const AdminNavbar = ({ isOpen, setIsOpen }) => {
   const navigate = useNavigate();
 
   const linkStyle =
@@ -10,59 +10,36 @@ const AdminNavbar = () => {
   const activeStyle = "bg-blue-700 text-white shadow-md";
 
   return (
-    <div className="flex flex-col h-screen w-64 py-8 px-6 bg-blue-900 text-blue-100 sticky top-0 shadow-xl">
-      
-      {/* Logo / Title */}
-      <h1 className="text-2xl font-bold mb-10 border-b border-blue-700 pb-4 tracking-wide">
+    <div
+      className={`fixed md:static top-0 left-0 h-screen w-64 bg-blue-900 text-blue-100 p-6 shadow-xl z-50
+      transform transition-transform duration-300
+      ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
+    >
+      {/* Title */}
+      <h1 className="text-2xl font-bold mb-10 border-b border-blue-700 pb-4">
         Admin Panel
       </h1>
 
-      {/* Navigation */}
-      <nav className="flex flex-col gap-3 text-[17px]">
-        
-        <NavLink
-          to="/dashboard/overview"
-          className={({ isActive }) =>
-            `${linkStyle} ${isActive ? activeStyle : "hover:bg-blue-800"}`
-          }
-        >
-          Overview
-        </NavLink>
-
-        <NavLink
-          to="/dashboard/createuser"
-          className={({ isActive }) =>
-            `${linkStyle} ${isActive ? activeStyle : "hover:bg-blue-800"}`
-          }
-        >
-          Create User
-        </NavLink>
-
-        <NavLink
-          to="/dashboard/assigntask"
-          className={({ isActive }) =>
-            `${linkStyle} ${isActive ? activeStyle : "hover:bg-blue-800"}`
-          }
-        >
-          Assign Task
-        </NavLink>
-        <NavLink
-          to="/dashboard/seereport"
-          className={({ isActive }) =>
-            `${linkStyle} ${isActive ? activeStyle : "hover:bg-blue-800"}`
-          }
-        >
-          See Report
-        </NavLink>
-
-        <NavLink
-          to="/dashboard/userdetails"
-          className={({ isActive }) =>
-            `${linkStyle} ${isActive ? activeStyle : "hover:bg-blue-800"}`
-          }
-        >
-          User Details
-        </NavLink>
+      {/* Links */}
+      <nav className="flex flex-col gap-3 text-[16px]">
+        {[
+          ["Overview", "/dashboard/overview"],
+          ["Create User", "/dashboard/createuser"],
+          ["Assign Task", "/dashboard/assigntask"],
+          ["See Report", "/dashboard/seereport"],
+          ["User Details", "/dashboard/userdetails"],
+        ].map(([name, path]) => (
+          <NavLink
+            key={name}
+            to={path}
+            onClick={() => setIsOpen(false)} // 🔥 CLOSE ON CLICK
+            className={({ isActive }) =>
+              `${linkStyle} ${isActive ? activeStyle : "hover:bg-blue-800"}`
+            }
+          >
+            {name}
+          </NavLink>
+        ))}
       </nav>
 
       {/* Logout */}
@@ -71,8 +48,9 @@ const AdminNavbar = () => {
           onClick={() => {
             localStorage.removeItem("admin");
             navigate("/home");
+            setIsOpen(false); // 🔥 CLOSE
           }}
-          className="w-full text-left p-3 rounded-lg hover:bg-blue-800 cursor-pointer hover:text-white transition-all duration-200 font-semibold"
+          className="w-full text-left p-3 rounded-lg hover:bg-blue-800 font-semibold"
         >
           Logout
         </button>
