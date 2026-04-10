@@ -1,0 +1,185 @@
+
+body{
+    padding: 0;
+    margin: 0;
+}
+
+/* Wrapper */
+#wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+}
+
+/* Top Navbar */
+#topmenu {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Logo */
+#logo {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Right Menu */
+#rightmenu {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+/* Menu Links */
+.menu {
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  position: relative;
+  transition: 0.3s ease;
+}
+
+/* Hover Effect */
+.menu::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: white;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+.menu:hover::after {
+  width: 100%;
+}
+
+.menu:hover {
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  #topmenu {
+    padding: 0 20px;
+  }
+
+  #rightmenu {
+    gap: 15px;
+  }
+
+  .menu {
+    font-size: 14px;
+  }
+}
+
+
+
+/* Inputs */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Cancel Button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background: #ef4444;
+  border-radius: 6px;
+}
+
+.cancelbtn:hover {
+  background: #dc2626;
+}
+
+/* Image Container */
+.imgcontainer {
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Avatar */
+img.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Container */
+.container {
+  padding: 20px;
+}
+
+/* Password text */
+span.psw {
+  float: right;
+  padding-top: 10px;
+  font-size: 13px;
+  color: #666;
+  cursor: pointer;
+}
+
+/* Google Logo */
+.glogo {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Responsive */
+@media screen and (max-width: 400px) {
+  span.psw {
+    display: block;
+    float: none;
+    text-align: right;
+  }
+
+  .cancelbtn {
+    width: 100%;
+  }
+}
