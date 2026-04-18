@@ -11,7 +11,10 @@ const server = createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://chat-app-eight-wine-40.vercel.app",
+    ],
     methods: ["GET", "POST"],
   },
 });
@@ -41,6 +44,8 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(5001, () => {
-  console.log("Server running on 5001");
+const PORT = process.env.PORT || 5001;
+
+server.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
 });
