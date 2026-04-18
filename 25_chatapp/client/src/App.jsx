@@ -1,5 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { io } from "socket.io-client";
+import { ThemeContext } from "./theme/ThemeContext";
+import { FiSun, FiMoon } from "react-icons/fi";
 
 const socket = io("https://chat-backend-30re.onrender.com");
 
@@ -9,6 +11,8 @@ const App = () => {
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef(null);
   const typingTimeoutRef = useRef(null);
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const isDark = theme === "dark";
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -52,7 +56,7 @@ const App = () => {
     const currentTime = new Date().toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
-      hour12: true
+      hour12: true,
     });
 
     const msgData = { message, sentByMe: true, time: currentTime };
@@ -69,57 +73,79 @@ const App = () => {
 
   return (
     <div
-      className="flex flex-col items-center justify-center min-h-screen p-4 font-sans"
-      style={{
-        backgroundImage:
-          "url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')",
-        backgroundBlendMode: "overlay",
-      }}
+      className={`flex items-center justify-center min-h-screen font-sans ${
+        isDark ? "bg-[#0b141a]" : "bg-gray-200"
+      }`}
     >
-      <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl overflow-hidden flex flex-col h-[80vh]">
+      <div
+        className={`w-full max-w-md h-[90vh] rounded-xl overflow-hidden shadow-2xl flex flex-col ${
+          isDark ? "bg-[#111b21]" : "bg-white"
+        }`}
+      >
         {/* Header */}
-        <div className="bg-green-900 p-4 text-white shadow-md">
-          <h1 className="text-xl font-bold tracking-tight">Chat App</h1>
-          <p className="text-xs text-green-200">
-            {/* Logic: Show Typing... only when the OTHER side is typing */}
-            {isTyping ? "Typing..." : "Online"}
-          </p>
+        <div
+          className={`px-4 py-3 flex items-center justify-between border-b ${
+            isDark
+              ? "bg-[#202c33] border-[#2a3942]"
+              : "bg-green-900 border-green-900"
+          }`}
+        >
+          <div>
+            <h1 className="text-white font-semibold text-lg">Chat App</h1>
+            <p className="text-xs text-gray-200">
+              {isTyping ? "Typing..." : "Online"}
+            </p>
+          </div>
+
+          {/* Theme Toggle */}
+<button
+  onClick={toggleTheme}
+  className="relative p-2 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 text-white active:scale-90"
+>
+  <span
+    className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
+      isDark ? "rotate-0 scale-100 opacity-100" : "rotate-90 scale-0 opacity-0"
+    }`}
+  >
+    <FiSun size={18} />
+  </span>
+
+  <span
+    className={`flex items-center justify-center transition-all duration-300 ${
+      isDark ? "rotate-90 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100"
+    }`}
+  >
+    <FiMoon size={18} />
+  </span>
+</button>
         </div>
 
-        {/* Message Area */}
+        {/* Chat Area */}
         <div
-          className="flex-1 overflow-y-auto p-4 space-y-4"
-          style={{
-            backgroundImage:
-              "url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')",
-            backgroundBlendMode: "overlay",
-          }}
+          className={`flex-1 overflow-y-auto px-3 py-4 space-y-2 ${
+            isDark ? "bg-[#0b141a]" : "bg-gray-200"
+          }`}
         >
           {chat.map((msg, i) => (
             <div
               key={i}
               className={`flex ${msg.sentByMe ? "justify-end" : "justify-start"}`}
             >
-              <div
-                className={`max-w-[80%] px-4 py-2 rounded-2xl shadow-sm text-sm relative ${
-                  msg.sentByMe
-                    ? "bg-green-900 text-white rounded-br-none"
-                    : "bg-white text-gray-800 border border-gray-200 rounded-bl-none"
-                }`}
-              >
+<div
+  className={`max-w-[75%] px-3 py-2 text-sm rounded-lg shadow ${
+    msg.sentByMe
+      ? isDark
+        ? "bg-[#202c33] text-white"   // dark → gray (sent)
+        : "bg-[#0d542b] text-white"  // light → green (sent)
+      : isDark
+        ? "bg-[#0d542b] text-white"  // dark → green (received)
+        : "bg-[#0d7639] text-white" // light → white (received)
+  }`}
+>
                 <div>{msg.message}</div>
-                <div
-                  className={`text-[10px] mt-1 text-right opacity-70 ${
-                    msg.sentByMe ? "text-green-100" : "text-gray-500"
-                  }`}
-                >
+
+                <div className="text-[10px] mt-1 text-right opacity-70">
                   {msg.time}
-                  {msg.sentByMe && (
-                    <span className="text-blue-400 text-[10px]">
-                      {/* Mock Blue Ticks */}
-                      ✓✓
-                    </span>
-                  )}
                 </div>
               </div>
             </div>
@@ -127,21 +153,32 @@ const App = () => {
           <div ref={scrollRef} />
         </div>
 
-        {/* Input Area */}
+        {/* Input */}
         <form
           onSubmit={sendMessage}
-          className="p-4 bg-white border-t border-gray-100 flex gap-2"
+          className={`px-3 py-2 flex items-center gap-2 border-t ${
+            isDark
+              ? "bg-[#202c33] border-[#2a3942]"
+              : "bg-white border-gray-300"
+          }`}
         >
           <input
             type="text"
-            placeholder="Type a message..."
+            placeholder="Type a message"
             value={message}
             onChange={handleInputChange}
-            className="flex-1 px-4 py-2 bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500 transition-all text-gray-700"
+            className={`flex-1 px-4 py-2 rounded-full focus:outline-none text-sm ${
+              isDark
+                ? "bg-[#2a3942] text-white placeholder-[#8696a0]"
+                : "bg-gray-100 text-black"
+            }`}
           />
+
           <button
             type="submit"
-            className="bg-green-900 hover:bg-green-700 text-white px-5 py-2 rounded-full font-medium transition-colors shadow-lg active:scale-95"
+            className={`px-4 py-2 rounded-full text-sm font-medium text-white ${
+              isDark ? "bg-green-900" : "bg-green-900"
+            }`}
           >
             Send
           </button>
